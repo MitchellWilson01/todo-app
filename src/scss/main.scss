@@ -1,0 +1,43 @@
+@import './variables.scss';
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    min-width: 320px;
+    max-width: 430px;
+    min-height: 550px;
+    max-height: 900px;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    background-color: $light;
+}
+
+h3 {
+    font-size: 1.17rem;
+}
+
+h4 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+h5 {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+p {
+    font-size: 1rem;
+}

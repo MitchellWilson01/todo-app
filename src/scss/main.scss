@@ -42,14 +42,15 @@ p {
     font-size: 1rem;
 }
 
+/*
 @media screen and (orientation: landscape) {
     html {
-      /* Rotate the content container */
+      // Rotate the content container 
       transform: rotate(90deg);
       transform-origin: right top;
-      /* Set content width to viewport height */
+      // Set content width to viewport height 
       width: 100vh;
-      /* Set content height to viewport width */
+      // Set content height to viewport width 
       height: 100vw;
       overflow-x: hidden;
       position: absolute;
@@ -57,3 +58,4 @@ p {
       left: 0;
     }
 }
+*/

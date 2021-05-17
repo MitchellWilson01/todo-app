@@ -14,6 +14,7 @@ const Header = () => {
     const [adding, setAdding] = useState(false);
     const [removing, setRemoving] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [mobile, setMobile] = useState(initialMobile);
 
     const ref = firestore.collection("groups");
 
@@ -83,26 +84,41 @@ const Header = () => {
         );
     }
 
+    const handleResize = () => {
+        if (window.innerWidth < 768) {
+            setMobile(true);
+        } else {
+            setMobile(false);
+            setOpen(true);
+        }
+    }
+
+    useEffect(() => {
+        getGroups();
+
+        if (!initialMobile && !mobile) {
+            setOpen(true);
+        }
+    }, []);
+
     let now = new Date();
     let dd = String(now.getDate()).padStart(2, '0');
     let mm = String(now.getMonth() + 1).padStart(2, '0');
     let yyyy = now.getFullYear();
     let today = mm + '/' + dd + '/' + yyyy;
 
-    useEffect(() => {
-        getGroups();
-    }, []);
+    window.addEventListener("resize", handleResize);
 
     if (location.pathname === "/") {
         return (
             <>
             <div className="header">
-                <h4><i className="fas fa-bars" onClick={toggleDrawer}></i>
+                <h4><i className="fas fa-bars" onClick={mobile ? toggleDrawer : null}></i>
                 <span>{today} &nbsp;<i className="fas fa-caret-down"></i></span></h4>
             </div>
             <div className={open ? "side-drawer drawer-open" : "side-drawer"}>
                 <div>
-                    <h4 className="user atom">Atom Notebook<i className="fas fa-bars" onClick={toggleDrawer}></i></h4>
+                    <h4 className="user atom">Atom Notebook<i className="fas fa-bars" onClick={mobile ? toggleDrawer : null}></i></h4>
                     <h4 className={active === 0 ? "active" : null} onClick={e => setActive(0)}>
                         <i className="far fa-sun"></i>My Day
                     </h4>

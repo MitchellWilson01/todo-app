@@ -29,6 +29,8 @@
 .side-drawer {
     position: fixed;
     width: 80%;
+    max-width: 20rem;
+    min-width: 15rem;
     top: 0;
     left: -100%;
     transition: 850ms;

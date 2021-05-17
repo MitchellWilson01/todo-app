@@ -16,9 +16,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     min-width: 320px;
     max-width: 430px;
-    min-height: 550px;
-    max-height: 900px;
-    height: 100%;
+    height: calc(var(--vh, 1vh) * 100) !important;
     overflow: auto;
     position: relative;
     background-color: $light;

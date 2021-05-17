@@ -40,24 +40,10 @@ const Home = () => {
             querySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
-
-            let am = [];
-            let pm = [];
-            items.forEach(item => {
-                console.log(item.time);
-                if (item.time[item.time.length - 2] === "A") {
-                    am.push(item.time);
-                    console.log("A" + " " + item.time);
-                } else {
-                    pm.push(item.time);
-                    console.log("P" + " " + item.time);
-                }
-            });
-            console.log(am);
-            console.log(pm);
             setTasks(items);
             setLoading(false);
         });
+        
     }
 
     const addTaskCallback = (newTask) => {

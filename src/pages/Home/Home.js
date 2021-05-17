@@ -33,6 +33,27 @@ const Home = () => {
         });
     }
 
+    const sortByTime = (items) => {
+        let times = items.map((item) => {
+            return item.time;
+        });
+
+        times.sort(function (a, b) {
+            return new Date("1970/01/01 " + a) - new Date("1970/01/01 " + b);
+        });
+
+        let sortedItems = [];
+        times.forEach((time) => {
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].time === time) {
+                    sortedItems.push(items[i]);
+                }
+            }
+        });
+
+        return sortedItems;
+    }
+
     const getTasks = () => {
         setLoading(true);
         ref.onSnapshot((querySnapshot) => {
@@ -40,10 +61,10 @@ const Home = () => {
             querySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
-            setTasks(items);
+            let sortedItems = sortByTime(items);
+            setTasks(sortedItems);
             setLoading(false);
         });
-        
     }
 
     const addTaskCallback = (newTask) => {

@@ -19,9 +19,9 @@
         justify-content: space-between;
     }
 
-    .fa-plus-square {
+    .fa-plus {
         font-size: 1.25rem;
-        margin-top: 0.2rem;
+        margin-top: 0.1rem;
     }
 
     .task {
@@ -31,7 +31,8 @@
         background-color: white;
         border-radius: 0.2rem;
         margin-top: 0.5rem;
-        border: solid rgba($gray, 0.3) 1px;
+        //border: solid rgba($gray, 0.3) 1px;
+        box-shadow: 0 0 2px 1px rgba($gray, 0.1);
     }
 
     .important-task {
@@ -122,5 +123,15 @@
 @media only screen and (min-width: 768px) {
     .home {
         padding-left: 19rem;
+        margin-top: 5.5rem;
+
+        .fa-plus {
+            font-size: 1.4rem;
+        }
+
+        .fa-bell, .fa-trash-alt {
+
+            font-size: 1.05rem;
+        }
     }
 }

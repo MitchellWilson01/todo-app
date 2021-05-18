@@ -181,6 +181,7 @@ const Home = () => {
                 <h3>My Day</h3>
                 <i className="fas fa-plus" onClick={e => setAdding(true)}></i>
             </div>
+            
             {adding ? <AddTask callback={addTaskCallback} groups={groups}/> : null}
             {
                 tasks.map((task) => (

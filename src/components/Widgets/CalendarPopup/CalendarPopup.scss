@@ -18,3 +18,12 @@
         background-color: $blue !important;
     }
 }
+
+@media only screen and (min-width: 768px) {
+    .calendar-popup {
+        .datepicker {
+            font-size: 1.17rem;
+            width: 7.5rem;
+        }
+    }
+}

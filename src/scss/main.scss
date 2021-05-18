@@ -39,4 +39,24 @@ p {
     font-size: 1rem;
 }
 
+@media only screen and (min-width: 768px) {
+    h3 {
+        font-size: 1.5rem;
+    }
+    
+    h4 {
+        font-size: 1.17rem;
+        font-weight: 600;
+    }
+    
+    h5 {
+        font-size: 1.1rem;
+        font-weight: 400;
+    }
+    
+    p {
+        font-size: 1.17rem;
+    }
+}
+
 //height: calc(var(--vh, 1vh) * 100);

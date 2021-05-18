@@ -140,7 +140,7 @@ const Header = () => {
             </div>
             <div className={open ? "side-drawer drawer-open" : "side-drawer"}>
                 <div>
-                    <h4 className="user atom">Atom Notebook<i className="fas fa-bars" onClick={mobile ? toggleDrawer : null}></i></h4>
+                    <h4 className="atom">Atom Notebook<i className="fas fa-bars" onClick={mobile ? toggleDrawer : null}></i></h4>
                     <h4 className={active === 0 ? "active" : null} onClick={e => setActive(0)}>
                         <i className="far fa-sun"></i>My Day
                     </h4>

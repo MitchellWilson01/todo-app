@@ -160,6 +160,14 @@ const Home = () => {
         setRemoving(true);
     }
 
+    const adjustTimeForDisplay = (time) => {
+        if (time[0] === "0") {
+            time = time.substring(1);
+        }
+
+        return time;
+    }
+
     useEffect(() => {
         getTasks();
         getGroups();
@@ -212,7 +220,7 @@ const Home = () => {
                             <h4>{task.title}</h4>
                             <p>
                                 <i className="far fa-folder-open"></i> {task.group}
-                                <span><i className="far fa-clock"></i> {task.time}</span>
+                                <span><i className="far fa-clock"></i> {adjustTimeForDisplay(task.time)}</span>
                             </p>
                             {removing && target === task.id ? startRemove(task) : null}
                         </div>

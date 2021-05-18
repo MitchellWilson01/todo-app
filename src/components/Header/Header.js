@@ -60,12 +60,12 @@ const Header = () => {
                 items.push(doc.data());
             });
 
-            //if (currentUser !== undefined) {
+            if (currentUser !== undefined) {
                 const usersGroups = filterByUser(items);
                 setGroups(usersGroups);
-            //} else {
-                //setGroups(items);
-            //}
+            } else {
+                setGroups(items);
+            }
             setLoading(false);
         });
     }

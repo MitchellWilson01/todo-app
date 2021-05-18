@@ -8,10 +8,11 @@ import './AddTask.scss';
 
 const AddTask = (props) => {
     const [title, setTitle] = useState();
-    const [group, setGroup] = useState();
+    const [group, setGroup] = useState(props.groups[0]);
     const [hour, setHour] = useState("12");
     const [minute, setMinute] = useState("00");
     const [period, setPeriod] = useState("AM");
+    const [groupSelected, setGroupSelected] = useState(false);
 
     const { date, setDate } = useContext(DateContext);
 
@@ -54,6 +55,11 @@ const AddTask = (props) => {
         let today = mm + '/' + dd + '/' + yyyy;
 
         return today;
+    }
+
+    const setGroupHandler = (label) => {
+        setGroup(label);
+        setGroupSelected(true);
     }
 
     return (
@@ -109,8 +115,8 @@ const AddTask = (props) => {
                         controlClassName="group-control"
                         options={props.groups}  
                         placeholder="Group"
-                        placeholderClassName={group ? "group-placeholder-selected" : "group-placeholder"}
-                        onChange={e => setGroup(e.label)}
+                        placeholderClassName={groupSelected ? "group-placeholder-selected" : "group-placeholder"}
+                        onChange={e => setGroupHandler(e.label)}
                         >
                     </Dropdown>
                 </div>

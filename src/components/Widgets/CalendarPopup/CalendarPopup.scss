@@ -1,0 +1,20 @@
+@import '../../../scss/variables.scss';
+
+.calendar-popup {
+    .datepicker {
+        width: 7rem;
+        font-size: 1rem;
+        text-align: center;
+        padding: 0.5rem 0;
+        border: none;
+        background-color: $blue;
+        border-radius: 0.5rem;
+        color: white;
+        box-shadow: 0 2px 4px 2px rgba($gray, 0.2);
+        outline: none;
+    }
+    
+    .react-datepicker__day--selected {
+        background-color: $blue !important;
+    }
+}

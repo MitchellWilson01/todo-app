@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { firestore } from '../../firebase';
+import { DateContext } from '../../contexts/DateContext';
 import AddTask from '../../components/Widgets/AddTask/AddTask';
 import './Home.scss';
 
@@ -10,6 +11,8 @@ const Home = () => {
     const [adding, setAdding] = useState(false);
     const [removing, setRemoving] = useState(false);
     const [target, setTarget] = useState();
+
+    const { date, setDate } = useContext(DateContext);
     
     const ref = firestore.collection("tasks");
     const groupsRef = firestore.collection("groups");
@@ -40,18 +43,32 @@ const Home = () => {
 
         times.sort(function (a, b) {
             return new Date("1970/01/01 " + a) - new Date("1970/01/01 " + b);
-        });
+        });;
 
         let sortedItems = [];
-        times.forEach((time) => {
-            for (let i = 0; i < items.length; i++) {
-                if (items[i].time === time) {
-                    sortedItems.push(items[i]);
-                }
+        times.forEach((time, index) => {
+            if (items[index].time === time) {
+                sortedItems.push(items[index]);
             }
         });
 
         return sortedItems;
+    }
+
+    const getTodaysTasks = (tasks) => {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        let today = mm + '/' + dd + '/' + yyyy;
+
+        let todaysTasks = [];
+        tasks.forEach((task) => {
+            if (task.date === today) {
+                todaysTasks.push(task);
+            }
+        });
+
+        return todaysTasks;
     }
 
     const getTasks = () => {
@@ -61,8 +78,10 @@ const Home = () => {
             querySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
+
             let sortedItems = sortByTime(items);
-            setTasks(sortedItems);
+            let todaysTasks = getTodaysTasks(sortedItems);
+            setTasks(todaysTasks);
             setLoading(false);
         });
     }
@@ -127,18 +146,18 @@ const Home = () => {
     useEffect(() => {
         getTasks();
         getGroups();
-    }, []);
+    }, [date]);
 
     return (
         <div className="home">
             <div className="heading">
                 <h3>My Day</h3>
-                <i className="fas fa-plus-square" onClick={e => setAdding(true)}></i>
+                <i className="fas fa-plus" onClick={e => setAdding(true)}></i>
             </div>
             {adding ? <AddTask callback={addTaskCallback} groups={groups}/> : null}
             {
                 tasks.map((task) => (
-                    <div key={task.title} className={task.important ? "task important-task" : "task"}>
+                    <div key={task.id} className={task.important ? "task important-task" : "task"}>
                         {task.completed == true ? 
                         <i className="fas fa-circle complete" onClick={e => toggleComplete({
                             title: task.title, 

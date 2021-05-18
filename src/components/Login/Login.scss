@@ -5,9 +5,16 @@
     padding: 1rem;
     position: relative;
     height: calc(var(--vh, 1vh) * 100);
+    margin: 0 auto;
+    background-image: url(../../images/bee.png);
+    background-position: bottom;
+    background-size: 100% 40%;
+    background-repeat: no-repeat;
 
     form {
         padding: 1rem;
+        max-width: 430px;
+        margin: 0 auto;
     }
 
     h1 {
@@ -74,5 +81,11 @@
 
     .login-success {
         background-color: $success;
+    }
+}
+
+@media only screen and (min-width: 645px) {
+    .login {
+        background-size: auto;
     }
 }

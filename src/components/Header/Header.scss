@@ -7,8 +7,11 @@
     background-color: white;
     width: 100%;
     box-shadow: 0 2px 4px 2px rgba($gray, 0.2);
-    //border-bottom: solid rgba($gray, 0.3) 1px;
     padding: 1rem;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     .fa-bars {
         font-size: 1.3rem;
@@ -18,18 +21,13 @@
     h4 {
         width: 100%;
     }
-
-    span {
-        float: right;
-        vertical-align: middle;
-        color: $gray;
-    }
 }
+
 
 .side-drawer {
     position: fixed;
     width: 80%;
-    max-width: 20rem;
+    max-width: 18rem;
     min-width: 15rem;
     top: 0;
     left: -100%;
@@ -44,6 +42,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: auto;
 
     .fa-bars {
         margin-right: 1rem;

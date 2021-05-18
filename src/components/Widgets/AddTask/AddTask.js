@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { firestore } from '../../../firebase';
+import React, { useState, useContext } from 'react';
+import { DateContext } from '../../../contexts/DateContext';
 import { v4 as uuidv4 } from "uuid";
 import Dropdown from 'react-dropdown';
 import './AddTask.scss';
@@ -11,7 +11,8 @@ const AddTask = (props) => {
     const [hour, setHour] = useState("12");
     const [minute, setMinute] = useState("00");
     const [period, setPeriod] = useState("AM");
-    const [groupSelected, setGroupSelected] = useState(false);
+
+    const { date, setDate } = useContext(DateContext);
 
     const periods = ["AM", "PM"];
     let hours = [];
@@ -42,6 +43,15 @@ const AddTask = (props) => {
 
         return str;
     });
+
+    const getDateFromContext = () => {
+        let dd = String(date.getDate()).padStart(2, '0');
+        let mm = String(date.getMonth() + 1).padStart(2, '0');
+        let yyyy = date.getFullYear();
+        let today = mm + '/' + dd + '/' + yyyy;
+
+        return today;
+    }
 
     return (
         <div className="add-task">
@@ -110,7 +120,7 @@ const AddTask = (props) => {
                     important: false,
                     id: uuidv4(),
                     group: group,
-                    date: "01/01/2020",
+                    date: getDateFromContext(),
                     completed: false
                 }
             )}>Add

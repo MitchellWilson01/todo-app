@@ -3,6 +3,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useHistory, useLocation } from 'react-router-dom';
 import { firestore } from '../../firebase';
 import { v4 as uuidv4 } from "uuid";
+import CalendarPopup from '../Widgets/CalendarPopup/CalendarPopup';
 import './Header.scss';
 
 const Header = () => {
@@ -113,8 +114,8 @@ const Header = () => {
         return (
             <>
             <div className="header">
-                <h4><i className="fas fa-bars" onClick={mobile ? toggleDrawer : null}></i>
-                <span>{today} &nbsp;<i className="fas fa-caret-down"></i></span></h4>
+                <i className="fas fa-bars" onClick={mobile ? toggleDrawer : null}></i>
+                <CalendarPopup />
             </div>
             <div className={open ? "side-drawer drawer-open" : "side-drawer"}>
                 <div>
@@ -145,7 +146,7 @@ const Header = () => {
                     {adding ? beginAdd() : null}
                     {removing ? <button className="stop-delete" onClick={e => setRemoving(false)}>Cancel</button> : null}
                     {groups.map((group) => (
-                        <div key={group.name}>
+                        <div key={group.id}>
                             <h4>
                                 {group.name} 
                                 {removing ? <button className="remove" onClick={e => deleteGroup(group)}>Delete</button> : null}

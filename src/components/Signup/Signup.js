@@ -61,7 +61,6 @@ const Signup = () => {
                 <button className={buttonClass} onClick={handleSubmit} disabled={loading}>Sign Up</button>
             </form>
             <Link to="/login" className="link"><h5>Already have an account?</h5></Link>
-            <div className="bee"></div>
         </div>
     );
 }

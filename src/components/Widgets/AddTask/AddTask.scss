@@ -8,6 +8,7 @@
     margin-top: 0.5rem;
     display: flex;
     flex-direction: column;
+    max-width: 35rem;
 
     input {
         width: calc(100% - 8rem);
@@ -18,7 +19,7 @@
         font-size: 1rem;
         font-weight: 700;
         margin-top: 0.3rem;
-        color: $gray;
+        color: $dark;
         width: 100%;
 
         &:focus {
@@ -56,7 +57,7 @@
     .group-dropdown {
         background-color: white;
         margin-top: 0.3rem;
-        color: $gray;
+        color: $dark;
         font-weight: 700;
         font-size: 1rem;
         border-radius: 0.2rem;
@@ -78,7 +79,7 @@
     }
 
     .group-placeholder {
-        color: rgba($gray, 0.5);
+        color: rgba($dark, 0.5);
     }
 
     .group-placeholder-selected {

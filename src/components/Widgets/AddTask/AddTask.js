@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { DateContext } from '../../../contexts/DateContext';
+import { useAuth } from '../../../contexts/AuthContext';
 import { v4 as uuidv4 } from "uuid";
 import Dropdown from 'react-dropdown';
 import './AddTask.scss';
@@ -13,6 +14,8 @@ const AddTask = (props) => {
     const [period, setPeriod] = useState("AM");
 
     const { date, setDate } = useContext(DateContext);
+
+    const { currentUser } = useAuth();
 
     const periods = ["AM", "PM"];
     let hours = [];
@@ -121,7 +124,8 @@ const AddTask = (props) => {
                     id: uuidv4(),
                     group: group,
                     date: getDateFromContext(),
-                    completed: false
+                    completed: false,
+                    user: currentUser.uid 
                 }
             )}>Add
             </button>

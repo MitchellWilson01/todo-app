@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { firestore } from '../../firebase';
 import { DateContext } from '../../contexts/DateContext';
+import { useAuth } from '../../contexts/AuthContext';
 import AddTask from '../../components/Widgets/AddTask/AddTask';
+import Header from '../../components/Header/Header';
 import './Home.scss';
 
 const Home = () => {
@@ -13,22 +15,36 @@ const Home = () => {
     const [target, setTarget] = useState();
 
     const { date, setDate } = useContext(DateContext);
+    const { currentUser } = useAuth();
     
     const ref = firestore.collection("tasks");
     const groupsRef = firestore.collection("groups");
 
+    const filterByUser = (groups) => {
+        let usersGroups = [];
+        groups.forEach((group) => {
+            if (group.user === currentUser.uid) {
+                usersGroups.push(group);
+            }
+        });
+
+        return usersGroups;
+    }
+
     const getGroups = () => {
         setLoading(true);
-        let strGroups = []
         groupsRef.onSnapshot((querySnapshot) => {
             const items = [];
             querySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
 
-            for (var key in items) {
-                if (items.hasOwnProperty(key)) {
-                    strGroups.push(JSON.stringify(items[key].name).slice(1, -1));
+            let usersGroups = filterByUser(items);
+
+            let strGroups = [];
+            for (var key in usersGroups) {
+                if (usersGroups.hasOwnProperty(key)) {
+                    strGroups.push(JSON.stringify(usersGroups[key].name).slice(1, -1));
                 }
             }
             setGroups(strGroups);
@@ -36,23 +52,23 @@ const Home = () => {
         });
     }
 
-    const sortByTime = (items) => {
-        let times = items.map((item) => {
-            return item.time;
-        });
-
-        times.sort(function (a, b) {
-            return new Date("1970/01/01 " + a) - new Date("1970/01/01 " + b);
-        });;
-
-        let sortedItems = [];
-        times.forEach((time, index) => {
-            if (items[index].time === time) {
-                sortedItems.push(items[index]);
+    const getUsersTasks = (tasks) => {
+        let usersTasks = [];
+        tasks.forEach((task) => {
+            if (task.user === currentUser.uid) {
+                usersTasks.push(task);
             }
         });
 
-        return sortedItems;
+        return usersTasks;
+    }
+
+    const sortByTime = (items) => {
+       items.sort(function (a, b) {
+        return new Date("1970/01/01 " + a.time) - new Date("1970/01/01 " + b.time);
+        });;
+
+        return items;
     }
 
     const getTodaysTasks = (tasks) => {
@@ -78,9 +94,10 @@ const Home = () => {
             querySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
-
-            let sortedItems = sortByTime(items);
-            let todaysTasks = getTodaysTasks(sortedItems);
+            
+            let usersTasks = getUsersTasks(items);
+            let sortedTasks = sortByTime(usersTasks);
+            let todaysTasks = getTodaysTasks(sortedTasks);
             setTasks(todaysTasks);
             setLoading(false);
         });
@@ -149,6 +166,8 @@ const Home = () => {
     }, [date]);
 
     return (
+        <>
+        <Header />
         <div className="home">
             <div className="heading">
                 <h3>My Day</h3>
@@ -201,6 +220,7 @@ const Home = () => {
                 ))
             }
         </div>
+        </>
     );
 }
 

@@ -22,7 +22,7 @@ const Header = () => {
     const history = useHistory();
     const location = useLocation();
 
-    const { logout } = useAuth();
+    const { currentUser, logout } = useAuth();
 
     const groupNameHandler = (e) => {
         setName(e.target.value);
@@ -41,6 +41,17 @@ const Header = () => {
         }
     }
 
+    const filterByUser = (groups) => {
+        let usersGroups = [];
+        groups.forEach((group) => {
+            if (group.user === currentUser.uid) {
+                usersGroups.push(group);
+            }
+        });
+
+        return usersGroups;
+    }
+
     const getGroups = () => {
         setLoading(true);
         ref.onSnapshot((querySnapshot) => {
@@ -48,7 +59,13 @@ const Header = () => {
             querySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
-            setGroups(items);
+
+            //if (currentUser !== undefined) {
+                const usersGroups = filterByUser(items);
+                setGroups(usersGroups);
+            //} else {
+                //setGroups(items);
+            //}
             setLoading(false);
         });
     }
@@ -79,7 +96,11 @@ const Header = () => {
         return (
             <div className="add-group">
                 <input type="text" onChange={groupNameHandler} autoFocus></input>
-                <button className="add" onClick={() => addGroup({ name, id: uuidv4() })}>Add</button>
+                <button className="add" onClick={() => addGroup({  
+                    id: uuidv4(),
+                    name,
+                    user: currentUser.uid
+                })}>Add</button>
                 <button className="cancel" onClick={() => setAdding(false)}>Cancel</button>
             </div>
         );

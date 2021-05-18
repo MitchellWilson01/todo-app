@@ -5,7 +5,6 @@ import { DateContext } from './contexts/DateContext';
 import PrivateRoute from './components/PrivateRoute';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
-import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
 
 const App = () => {
@@ -21,8 +20,7 @@ const App = () => {
     return (
         <Router>
             <AuthProvider>
-            <DateContext.Provider value={{ date, setDate }}>
-                <Header />
+            <DateContext.Provider value={{ date, setDate }}>              
                 <Switch>
                     <PrivateRoute path="/" exact component={Home} />
                     <Route path="/signup" exact component={Signup} />

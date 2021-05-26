@@ -126,24 +126,49 @@ const Home = () => {
         setRemoving(false);
     }
 
-    const toggleComplete = (updatedTask) => {
+    const changeTaskStage = (task) => {
         setLoading();
+
+        let taskStyle = "";
+        if (task.completed) {
+            task.completed = false;
+            task.progress = false;
+        } else if (task.progress) {
+            task.completed = true;
+            task.progress = false;
+        } else {
+            task.progress = true;
+        }
+
         ref
-          .doc(updatedTask.id)
-          .update(updatedTask)
-          .catch((err) => {
-            console.error(err);
-          });
+            .doc(task.id)
+            .update(task)
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+
+    const getTaskStage = (task) => {
+        let stage = "";
+        if (task.completed) {
+            stage = "complete";
+        } else if (task.progress) {
+            stage = "in-progress";
+        } else {
+            stage = "incomplete";
+        }
+
+        return stage;
     }
 
     const toggleImportant = (updatedTask) => {
         setLoading();
         ref
-          .doc(updatedTask.id)
-          .update(updatedTask)
-          .catch((err) => {
-            console.error(err);
-          });
+            .doc(updatedTask.id)
+            .update(updatedTask)
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     const startRemove = (task) => {
@@ -186,36 +211,14 @@ const Home = () => {
             {
                 tasks.map((task) => (
                     <div key={task.id} className={task.important ? "task important-task" : "task"}>
-                        {task.completed == true ? 
-                        <i className="fas fa-circle complete" onClick={e => toggleComplete({
-                            title: task.title, 
-                            time: task.time, 
-                            important: task.important, 
-                            group: task.group, 
-                            id: task.id,
-                            date: task.date,
-                            completed: !task.completed,
-                        })}><i className="fas fa-check"></i></i> 
-
-                        : <i className="fas fa-circle incomplete" onClick={e => toggleComplete({
-                            title: task.title, 
-                            time: task.time, 
-                            important: task.important, 
-                            group: task.group, 
-                            id: task.id,
-                            date: task.date,
-                            completed: !task.completed,
-                        })}></i>}
+                        <i className={"fas fa-circle" + " " + getTaskStage(task)} onClick={e => changeTaskStage(task)}>
+                            {task.completed ? <i className="fas fa-check"></i> : null}
+                        </i> 
 
                         <div>
                             <i className={task.important ? "far fa-bell important-bell" : "far fa-bell"} onClick={e => toggleImportant({
-                                title: task.title, 
-                                time: task.time, 
-                                important: !task.important, 
-                                group: task.group, 
-                                id: task.id,
-                                date: task.date,
-                                completed: task.completed,
+                                ...task, 
+                                important: !task.important
                             })}></i>
                             <i className="fas fa-trash-alt" onClick={e => setRemovingHelper(task.id)}></i>
                             <h4>{task.title}</h4>

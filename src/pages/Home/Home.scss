@@ -75,6 +75,12 @@
         position: relative;
     }
 
+    .in-progress {
+        color: rgba($blue, 0.1);
+        -webkit-text-stroke: $blue 2px;
+        position: relative;
+    }
+
     .incomplete {
         color: rgba($yellow, 0.1);
         -webkit-text-stroke: $yellow 2px;

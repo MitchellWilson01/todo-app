@@ -131,6 +131,7 @@ const AddTask = (props) => {
                     group: group,
                     date: getDateFromContext(),
                     completed: false,
+                    progress: false,
                     user: currentUser.uid 
                 }
             )}>Add

@@ -1,0 +1,156 @@
+@import '../../../scss/variables.scss';
+
+.add-habit {
+    padding: 0.7rem 1rem 1rem 1rem;
+    box-shadow: 0 2px 4px 2px rgba($gray, 0.2);
+    background-color: white;
+    border-radius: 0.2rem;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 35rem;
+
+    input {
+        width: calc(100% - 8rem);
+        height: 2rem;
+        border-radius: 0.2rem;
+        border: solid rgba($gray, 0.3) 1px;
+        padding-left: 0.5rem;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-top: 0.3rem;
+        color: $dark;
+        width: 100%;
+
+        &:focus {
+            border: solid rgba($blue, 0.3) 1px;
+            outline: none !important;
+        }
+    }
+
+    .time-select {
+        display: flex;
+        flex-direction: row-reverse;
+
+        .container {
+            display: inline-block;
+        }
+
+        h4 {
+            margin-top: 0.6rem;
+            margin-left: 0.2rem;
+            margin-right: 0.2rem;
+        }
+    }
+
+    .dropdown {
+        background-color: rgba($blue, 0.1);
+        margin-top: 0.3rem;
+        color: $blue;
+        font-weight: 700;
+        font-size: 1rem;
+        border-radius: 0.2rem;
+        border-top: solid rgba($blue, 0.1) 0.4rem;
+        border-bottom: solid rgba($blue, 0.1) 0.4rem;
+    }
+
+    .group-dropdown {
+        background-color: white;
+        margin-top: 0.3rem;
+        color: $dark;
+        font-weight: 700;
+        font-size: 1rem;
+        border-radius: 0.2rem;
+        border-top: solid white calc(0.4rem - 1px);
+        border-bottom: solid white calc(0.4rem - 1px);
+        box-shadow: 0 0 0 1px rgba($gray, 0.3);
+
+        &:focus {
+            box-shadow: 0 0 0 1px rgba($blue, 0.3);
+        }
+    }
+
+    .period {
+        margin-left: 0.2rem;
+    }
+
+    .placeholder {
+        margin-top: 0.2rem;
+    }
+
+    .group-placeholder {
+        color: rgba($dark, 0.5);
+    }
+
+    .group-placeholder-selected {
+        color: $dark;
+    }
+
+    .control {
+        height: 1.2rem;
+        width: 2rem;
+        text-align: center;
+    }
+
+    .group-control {
+        height: 1.2rem;
+        width: 100%;
+        padding-left: 0.5rem;
+    }
+
+    .hour {
+        margin-left: 1rem;
+    }
+
+    .arrow {
+        width: 0;
+        height: 0;
+    }
+
+    .menu {
+        text-align: center;
+        max-height: 7.5rem;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        
+        -webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .group-menu {
+        max-height: 7.5rem;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        padding-left: 0.5rem;
+        
+        -webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .group-select {
+        margin-right: auto;
+        flex: 1;
+    }
+
+    .add, .cancel {
+        height: 2rem;
+        border-radius: 0.2rem;
+        margin-top: 0.3rem;
+        border: none;
+        color: white;
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .add {
+        background-color: $success;
+    }
+
+    .cancel {
+        background-color: $gray;
+    }
+}

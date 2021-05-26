@@ -17,8 +17,9 @@ const Tutorial = (props) => {
             <h4>Adding a Group</h4>
             <p>Each task will fall under a certain group. In the side menu you 
             click the "+" button to add a group. You can also click the "-" 
-            button if you want to remove a group. Removing a group will also 
-            remove all of the tasks that belong to that group.</p>
+            button if you want to remove a group. Removing a group will not 
+            remove your tasks for that group. So, you can add an accidentally  
+            deleted group back and not lose your tasks.</p>
 
             <h4>Adding a Task</h4>
             <p>To add a task just click the "+" button near the top right of 

@@ -3,7 +3,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import { firestore } from '../../firebase';
 import { v4 as uuidv4 } from "uuid";
-import moment from 'moment';
 import CalendarPopup from '../Widgets/CalendarPopup/CalendarPopup';
 import './Header.scss';
 
@@ -11,7 +10,6 @@ import './Header.scss';
 const Header = (props) => {
     const initialMobile = window.innerWidth < 768 ? true : false;
     const [open, setOpen] = useState(false);
-    //const [active, setActive] = useState(0);
     const [groups, setGroups] = useState([]);
     const [name, setName] = useState();
     const [adding, setAdding] = useState(false);

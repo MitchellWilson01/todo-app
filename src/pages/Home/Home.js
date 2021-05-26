@@ -214,7 +214,7 @@ const Home = () => {
                 <i className="fas fa-plus" onClick={e => setAdding(true)}></i>
             </div>
             
-            {adding ? <AddTask callback={addTaskCallback} groups={groups}/> : null}
+            {adding ? <AddTask callback={addTaskCallback} groups={groups} /> : null}
             {
                 tasks.map((task) => (
                     <div key={task.id} className={task.important ? "task important-task" : "task"}>

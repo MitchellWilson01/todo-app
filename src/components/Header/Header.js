@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import { firestore } from '../../firebase';
 import { v4 as uuidv4 } from "uuid";
+import moment from 'moment';
 import CalendarPopup from '../Widgets/CalendarPopup/CalendarPopup';
 import './Header.scss';
 
-const Header = () => {
+
+const Header = (props) => {
     const initialMobile = window.innerWidth < 768 ? true : false;
     const [open, setOpen] = useState(false);
-    const [active, setActive] = useState(0);
+    //const [active, setActive] = useState(0);
     const [groups, setGroups] = useState([]);
     const [name, setName] = useState();
     const [adding, setAdding] = useState(false);
@@ -131,7 +133,7 @@ const Header = () => {
 
     window.addEventListener("resize", handleResize);
 
-    if (location.pathname === "/") {
+    if (location.pathname !== "/login" && location.pathname!== "/signup") {
         return (
             <>
             <div className="header">
@@ -141,16 +143,22 @@ const Header = () => {
             <div className={open ? "side-drawer drawer-open" : "side-drawer"}>
                 <div>
                     <h4 className="atom">Atom Notebook<i className="fas fa-bars" onClick={mobile ? toggleDrawer : null}></i></h4>
-                    <h4 className={active === 0 ? "active" : null} onClick={e => setActive(0)}>
-                        <i className="far fa-sun"></i>My Day
-                    </h4>
-                    <h4 className={active === 1 ? "active" : null} onClick={e => setActive(1)}>
-                        <i className="far fa-bell"></i>Important
-                    </h4>
-                    <h4 className={active === 2 ? "active" : null} onClick={e => setActive(2)}>
-                        <i className="far fa-calendar-alt"></i>Calendar
-                    </h4>
-                    <h4 className={active === 3 ? "active" : null} onClick={e => setActive(3)}>
+                    <Link to="/" className="link">
+                        <h4 className={props.active === 0 ? "active" : null}>
+                            <i className="far fa-sun"></i>My Day
+                        </h4>
+                    </Link>
+                    <Link to="/habits" className="link">
+                        <h4 className={props.active === 1 ? "active" : null}>
+                            <i className="far fa-lightbulb"></i>Habits
+                        </h4>
+                    </Link>
+                    <Link to="/events" className="link">
+                        <h4 className={props.active === 2 ? "active" : null}>
+                            <i className="far fa-calendar-alt"></i>Calendar
+                        </h4>
+                    </Link>
+                    <h4 className={props.active === 3 ? "active" : null}>
                         <i className="far fa-edit"></i>Notes
                     </h4>
                 </div>

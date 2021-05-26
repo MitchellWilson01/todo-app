@@ -1,0 +1,14 @@
+@import '../../scss/variables.scss';
+
+.events {
+    padding: 1rem;
+    margin-top: 4.5rem;
+    overflow: auto;
+}
+
+@media only screen and (min-width: 768px) {
+    .events {
+        padding-left: 19rem;
+        margin-top: 5.5rem;
+    }
+}

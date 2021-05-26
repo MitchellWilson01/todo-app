@@ -43,6 +43,10 @@
     justify-content: space-between;
     overflow: auto;
 
+    .link {
+        text-decoration: none;
+    }
+
     .fa-bars {
         float: right;
         font-size: 1.3rem;
@@ -55,6 +59,7 @@
 
     h4 {
         padding: 0.5rem 0 0.5rem 1rem;
+        color: $gray;
 
         &:active {
             background-color: rgba($gray, 0.1);
@@ -79,7 +84,7 @@
         color: $yellow;
     }
 
-    .fa-bell {
+    .fa-lightbulb {
         color: $red;
     }
 
@@ -92,11 +97,7 @@
     }
 
     .fa-sign-out-alt {
-        //position: absolute;
-        //bottom: 1rem;
-        //right: 1rem;
         margin-right: 0;
-        //font-size: 1rem;
     }
 
     .logout {

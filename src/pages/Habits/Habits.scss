@@ -1,0 +1,14 @@
+@import '../../scss/variables.scss';
+
+.habits {
+    padding: 1rem;
+    margin-top: 4.5rem;
+    overflow: auto;
+}
+
+@media only screen and (min-width: 768px) {
+    .habits {
+        padding-left: 19rem;
+        margin-top: 5.5rem;
+    }
+}

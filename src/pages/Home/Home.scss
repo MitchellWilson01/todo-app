@@ -31,7 +31,6 @@
         background-color: white;
         border-radius: 0.2rem;
         margin-top: 0.5rem;
-        //border: solid rgba($gray, 0.3) 1px;
         box-shadow: 0 0 2px 1px rgba($gray, 0.1);
     }
 
@@ -67,24 +66,22 @@
     .fa-circle {
         font-size: 1.5rem;
         margin-right: 1rem;
+        position: relative;
     }
 
     .complete {
         color: rgba($success, 0.1);
-        -webkit-text-stroke: $success 2px;
-        position: relative;
+        -webkit-text-stroke: $success 2px;      
     }
 
     .in-progress {
         color: rgba($blue, 0.1);
         -webkit-text-stroke: $blue 2px;
-        position: relative;
     }
 
     .incomplete {
         color: rgba($yellow, 0.1);
         -webkit-text-stroke: $yellow 2px;
-        position: relative;
     }
 
     .fa-check {
@@ -136,7 +133,6 @@
         }
 
         .fa-bell, .fa-trash-alt {
-
             font-size: 1.05rem;
         }
     }

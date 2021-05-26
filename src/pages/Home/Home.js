@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { firestore } from '../../firebase';
 import { DateContext } from '../../contexts/DateContext';
 import { useAuth } from '../../contexts/AuthContext';
+import Tutorial from '../../components/Widgets/Tutorial/Tutorial';
 import AddTask from '../../components/Widgets/AddTask/AddTask';
 import Header from '../../components/Header/Header';
 import './Home.scss';
@@ -13,6 +14,7 @@ const Home = () => {
     const [adding, setAdding] = useState(false);
     const [removing, setRemoving] = useState(false);
     const [target, setTarget] = useState();
+    const [tutorialOpen, setTutorialOpen] = useState(true);
 
     const { date, setDate } = useContext(DateContext);
     const { currentUser } = useAuth();
@@ -193,6 +195,10 @@ const Home = () => {
         return time;
     }
 
+    const closeTutorial = () => {
+        setTutorialOpen(false);
+    }
+
     useEffect(() => {
         getTasks();
         getGroups();
@@ -200,7 +206,8 @@ const Home = () => {
 
     return (
         <>
-        <Header />
+        <Header active={0} />
+        {tutorialOpen ? <Tutorial callback={closeTutorial} /> : null}
         <div className="home">
             <div className="heading">
                 <h3>My Day</h3>
